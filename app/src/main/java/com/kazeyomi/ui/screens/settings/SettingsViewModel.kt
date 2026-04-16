@@ -43,20 +43,20 @@ class SettingsViewModel @Inject constructor(
 
     private fun loadSettings() {
         viewModelScope.launch {
-            launch { preferencesManager.serverUrl.collect { _uiState.update { it.copy(serverUrl = it.serverUrl) } } }
-            launch { preferencesManager.themeMode.collect { _uiState.update { it.copy(themeMode = it.themeMode) } } }
-            launch { preferencesManager.dynamicColor.collect { _uiState.update { it.copy(dynamicColor = it.dynamicColor) } } }
-            launch { preferencesManager.language.collect { _uiState.update { it.copy(language = it.language) } } }
-            launch { preferencesManager.libraryDisplayMode.collect { _uiState.update { it.copy(libraryDisplayMode = it.libraryDisplayMode) } } }
-            launch { preferencesManager.autoUpdateLibrary.collect { _uiState.update { it.copy(autoUpdateLibrary = it.autoUpdateLibrary) } } }
-            launch { preferencesManager.readerMode.collect { _uiState.update { it.copy(readerMode = it.readerMode) } } }
-            launch { preferencesManager.readerDirection.collect { _uiState.update { it.copy(readerDirection = it.readerDirection) } } }
-            launch { preferencesManager.readerShowPageNum.collect { _uiState.update { it.copy(readerShowPageNum = it.readerShowPageNum) } } }
-            launch { preferencesManager.readerVolumeKeys.collect { _uiState.update { it.copy(readerVolumeKeys = it.readerVolumeKeys) } } }
-            launch { preferencesManager.readerKeepScreen.collect { _uiState.update { it.copy(readerKeepScreen = it.readerKeepScreen) } } }
-            launch { preferencesManager.readerAutoMark.collect { _uiState.update { it.copy(readerAutoMark = it.readerAutoMark) } } }
-            launch { preferencesManager.downloadAsCbz.collect { _uiState.update { it.copy(downloadAsCbz = it.downloadAsCbz) } } }
-            launch { preferencesManager.downloadChapters.collect { _uiState.update { it.copy(downloadChapters = it.downloadChapters) } } }
+            launch { preferencesManager.serverUrl.collect { value -> _uiState.update { it.copy(serverUrl = value) } } }
+            launch { preferencesManager.themeMode.collect { value -> _uiState.update { it.copy(themeMode = value) } } }
+            launch { preferencesManager.dynamicColor.collect { value -> _uiState.update { it.copy(dynamicColor = value) } } }
+            launch { preferencesManager.language.collect { value -> _uiState.update { it.copy(language = value) } } }
+            launch { preferencesManager.libraryDisplayMode.collect { value -> _uiState.update { it.copy(libraryDisplayMode = value) } } }
+            launch { preferencesManager.autoUpdateLibrary.collect { value -> _uiState.update { it.copy(autoUpdateLibrary = value) } } }
+            launch { preferencesManager.readerMode.collect { value -> _uiState.update { it.copy(readerMode = value) } } }
+            launch { preferencesManager.readerDirection.collect { value -> _uiState.update { it.copy(readerDirection = value) } } }
+            launch { preferencesManager.readerShowPageNum.collect { value -> _uiState.update { it.copy(readerShowPageNum = value) } } }
+            launch { preferencesManager.readerVolumeKeys.collect { value -> _uiState.update { it.copy(readerVolumeKeys = value) } } }
+            launch { preferencesManager.readerKeepScreen.collect { value -> _uiState.update { it.copy(readerKeepScreen = value) } } }
+            launch { preferencesManager.readerAutoMark.collect { value -> _uiState.update { it.copy(readerAutoMark = value) } } }
+            launch { preferencesManager.downloadAsCbz.collect { value -> _uiState.update { it.copy(downloadAsCbz = value) } } }
+            launch { preferencesManager.downloadChapters.collect { value -> _uiState.update { it.copy(downloadChapters = value) } } }
         }
     }
 
