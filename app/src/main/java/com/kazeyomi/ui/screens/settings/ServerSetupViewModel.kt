@@ -2,6 +2,7 @@ package com.kazeyomi.ui.screens.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kazeyomi.data.api.ApiException
 import com.kazeyomi.data.local.PreferencesManager
 import com.kazeyomi.data.repository.ServerRepository
 import com.kazeyomi.domain.model.ServerInfo
@@ -52,19 +53,41 @@ class ServerSetupViewModel @Inject constructor(
                         }
                     },
                     onFailure = { e ->
+                        val errorMessage = when (e) {
+                            is ApiException -> {
+                                when (e.code) {
+                                    401 -> "Authentication failed. Please check your username and password."
+                                    403 -> "Access forbidden. Please check your credentials."
+                                    404 -> "Server not found at this address. Please check the URL."
+                                    else -> "Connection failed (${e.code}): ${e.message}"
+                                }
+                            }
+                            else -> "Connection failed: ${e.message}"
+                        }
                         _uiState.update {
                             it.copy(
                                 isConnecting = false,
-                                error = "Connection failed: ${e.message}"
+                                error = errorMessage
                             )
                         }
                     }
                 )
             } catch (e: Exception) {
+                val errorMessage = when (e) {
+                    is ApiException -> {
+                        when (e.code) {
+                            401 -> "Authentication failed. Please check your username and password."
+                            403 -> "Access forbidden. Please check your credentials."
+                            404 -> "Server not found at this address. Please check the URL."
+                            else -> "Connection failed (${e.code}): ${e.message}"
+                        }
+                    }
+                    else -> "Connection failed: ${e.message}"
+                }
                 _uiState.update {
                     it.copy(
                         isConnecting = false,
-                        error = "Connection failed: ${e.message}"
+                        error = errorMessage
                     )
                 }
             }

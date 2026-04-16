@@ -1,12 +1,36 @@
 package com.kazeyomi.data.api
 
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
+
+class ErrorResponseInterceptor : Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val request = chain.request()
+        val response = chain.proceed(request)
+        
+        if (!response.isSuccessful) {
+            val contentType = response.header("Content-Type")
+            if (contentType == null || !contentType.contains("application/json")) {
+                response.close()
+                throw ApiException(
+                    code = response.code,
+                    message = "Server returned error ${response.code}. Expected JSON response."
+                )
+            }
+        }
+        
+        return response
+    }
+}
+
+class ApiException(val code: Int, override val message: String) : Exception(message)
 
 @Singleton
 class ApiClient @Inject constructor() {
@@ -24,6 +48,7 @@ class ApiClient @Inject constructor() {
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
+            .addInterceptor(ErrorResponseInterceptor())
             .apply {
                 if (username != null && password != null) {
                     addInterceptor { chain ->
