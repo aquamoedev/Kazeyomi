@@ -6,6 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.kazeyomi.ui.screens.MoreMenuScreen
 import com.kazeyomi.ui.screens.about.AboutScreen
 import com.kazeyomi.ui.screens.browse.BrowseScreen
 import com.kazeyomi.ui.screens.browse.ExtensionsScreen

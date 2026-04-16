@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.kazeyomi.ui.components.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,7 +49,7 @@ fun SettingsScreen(
                     trailingContent = { Icon(Icons.Default.ChevronRight, contentDescription = null) },
                     modifier = Modifier.clickable(onClick = onServerSetupClick)
                 )
-                HorizontalDivider()
+                Divider()
             }
 
             item {
@@ -61,7 +62,7 @@ fun SettingsScreen(
                     checked = uiState.dynamicColor,
                     onCheckedChange = { viewModel.setDynamicColor(it) }
                 )
-                HorizontalDivider()
+                Divider()
             }
             item {
                 DropdownSetting(
@@ -70,7 +71,7 @@ fun SettingsScreen(
                     options = listOf("system", "light", "dark"),
                     onValueChange = { viewModel.setThemeMode(it) }
                 )
-                HorizontalDivider()
+                Divider()
             }
             item {
                 DropdownSetting(
@@ -79,7 +80,7 @@ fun SettingsScreen(
                     options = listOf("en", "ja", "ko", "zh"),
                     onValueChange = { viewModel.setLanguage(it) }
                 )
-                HorizontalDivider()
+                Divider()
             }
 
             item {
@@ -92,7 +93,7 @@ fun SettingsScreen(
                     options = listOf("grid", "list"),
                     onValueChange = { viewModel.setLibraryDisplayMode(it) }
                 )
-                HorizontalDivider()
+                Divider()
             }
             item {
                 SwitchSetting(
@@ -101,7 +102,7 @@ fun SettingsScreen(
                     checked = uiState.autoUpdateLibrary,
                     onCheckedChange = { viewModel.setAutoUpdateLibrary(it) }
                 )
-                HorizontalDivider()
+                Divider()
             }
 
             item {
@@ -114,7 +115,7 @@ fun SettingsScreen(
                     options = listOf("VERTICAL", "HORIZONTAL_SINGLE", "HORIZONTAL_CONTINUOUS", "WEBTOON"),
                     onValueChange = { viewModel.setReaderMode(it) }
                 )
-                HorizontalDivider()
+                Divider()
             }
             item {
                 DropdownSetting(
@@ -123,7 +124,7 @@ fun SettingsScreen(
                     options = listOf("LEFT_TO_RIGHT", "RIGHT_TO_LEFT"),
                     onValueChange = { viewModel.setReaderDirection(it) }
                 )
-                HorizontalDivider()
+                Divider()
             }
             item {
                 SwitchSetting(
@@ -131,7 +132,7 @@ fun SettingsScreen(
                     checked = uiState.readerShowPageNum,
                     onCheckedChange = { viewModel.setReaderShowPageNum(it) }
                 )
-                HorizontalDivider()
+                Divider()
             }
             item {
                 SwitchSetting(
@@ -140,7 +141,7 @@ fun SettingsScreen(
                     checked = uiState.readerVolumeKeys,
                     onCheckedChange = { viewModel.setReaderVolumeKeys(it) }
                 )
-                HorizontalDivider()
+                Divider()
             }
             item {
                 SwitchSetting(
@@ -148,7 +149,7 @@ fun SettingsScreen(
                     checked = uiState.readerKeepScreen,
                     onCheckedChange = { viewModel.setReaderKeepScreen(it) }
                 )
-                HorizontalDivider()
+                Divider()
             }
             item {
                 SwitchSetting(
@@ -156,7 +157,7 @@ fun SettingsScreen(
                     checked = uiState.readerAutoMark,
                     onCheckedChange = { viewModel.setReaderAutoMark(it) }
                 )
-                HorizontalDivider()
+                Divider()
             }
 
             item {
@@ -169,7 +170,7 @@ fun SettingsScreen(
                     checked = uiState.downloadAsCbz,
                     onCheckedChange = { viewModel.setDownloadAsCbz(it) }
                 )
-                HorizontalDivider()
+                Divider()
             }
             item {
                 DropdownSetting(
@@ -178,7 +179,7 @@ fun SettingsScreen(
                     options = listOf("1", "2", "3", "5", "10"),
                     onValueChange = { viewModel.setDownloadChapters(it.toInt()) }
                 )
-                HorizontalDivider()
+                Divider()
             }
         }
     }

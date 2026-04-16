@@ -169,6 +169,7 @@ fun ConfirmDialog(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun <T> DropdownSelector(
     label: String,

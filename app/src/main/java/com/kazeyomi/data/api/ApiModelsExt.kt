@@ -1,6 +1,16 @@
 package com.kazeyomi.data.api
 
 import com.google.gson.annotations.SerializedName
+import com.kazeyomi.domain.model.Category
+import com.kazeyomi.domain.model.Download
+import com.kazeyomi.domain.model.DownloadState
+import com.kazeyomi.domain.model.Extension
+import com.kazeyomi.domain.model.ExtensionType
+import com.kazeyomi.domain.model.History
+import com.kazeyomi.domain.model.InstallButton
+import com.kazeyomi.domain.model.Manga
+import com.kazeyomi.domain.model.ServerInfo
+import com.kazeyomi.domain.model.Source
 
 data class SourceDto(
     val id: String = "",

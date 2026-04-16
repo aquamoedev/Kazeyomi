@@ -48,7 +48,7 @@ fun BrowseScreen(
                     trailingContent = { Icon(Icons.Default.ChevronRight, contentDescription = null) },
                     modifier = Modifier.clickable(onClick = onGlobalSearchClick)
                 )
-                HorizontalDivider()
+                Divider()
             }
 
             item {
@@ -59,7 +59,7 @@ fun BrowseScreen(
                     trailingContent = { Icon(Icons.Default.ChevronRight, contentDescription = null) },
                     modifier = Modifier.clickable(onClick = onExtensionsClick)
                 )
-                HorizontalDivider()
+                Divider()
             }
 
             item {
@@ -70,7 +70,7 @@ fun BrowseScreen(
                     trailingContent = { Icon(Icons.Default.ChevronRight, contentDescription = null) },
                     modifier = Modifier.clickable(onClick = onSourcesClick)
                 )
-                HorizontalDivider()
+                Divider()
             }
 
             item {

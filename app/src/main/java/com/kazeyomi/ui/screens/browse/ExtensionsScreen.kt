@@ -127,5 +127,5 @@ fun ExtensionItem(
         },
         modifier = Modifier.clickable {}
     )
-    HorizontalDivider()
+    Divider()
 }

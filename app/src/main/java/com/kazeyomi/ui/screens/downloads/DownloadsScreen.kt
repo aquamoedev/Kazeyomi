@@ -120,7 +120,7 @@ fun DownloadItem(
                     DownloadState.DOWNLOADING -> {
                         Spacer(modifier = Modifier.height(4.dp))
                         LinearProgressIndicator(
-                            progress = { download.progress / 100f },
+                            progress = download.progress / 100f,
                             modifier = Modifier.fillMaxWidth()
                         )
                         Text(
@@ -178,5 +178,5 @@ fun DownloadItem(
         },
         modifier = Modifier.clickable(onClick = onClick)
     )
-    HorizontalDivider()
+    Divider()
 }

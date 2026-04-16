@@ -19,6 +19,7 @@ import coil.compose.AsyncImage
 import coil.compose.SubcomposeAsyncImage
 import com.kazeyomi.domain.model.Manga
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MangaCoverCard(
     manga: Manga,
@@ -185,6 +186,7 @@ fun MangaGridItem(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MangaListItem(
     manga: Manga,

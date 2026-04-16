@@ -3,8 +3,8 @@ package com.kazeyomi.ui.screens.updates
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kazeyomi.data.api.ApiClient
+import com.kazeyomi.data.api.UpdateDto
 import com.kazeyomi.domain.model.DownloadState
-import com.kazeyomi.domain.model.UpdateDto
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -43,7 +43,7 @@ class UpdatesViewModel @Inject constructor(
             _uiState.update { it.copy(isLoading = true, error = null) }
             try {
                 val response = apiClient.getApi().getUpdates()
-                val updates = response.updates?.map { dto ->
+                val updates = response.updates?.map { dto: UpdateDto ->
                     UpdateUiModel(
                         mangaId = dto.mangaId,
                         mangaTitle = dto.mangaTitle,

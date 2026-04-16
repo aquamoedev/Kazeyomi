@@ -1,5 +1,6 @@
 package com.kazeyomi.ui.screens.reader
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
@@ -29,7 +30,7 @@ import com.kazeyomi.domain.model.ReadingDirection
 import com.kazeyomi.domain.model.ReadingMode
 import com.kazeyomi.ui.components.LoadingIndicator
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ReaderScreen(
     mangaId: Int,
@@ -117,6 +118,7 @@ fun ReaderScreen(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun VerticalReader(
     pages: List<ChapterPage>,
@@ -133,49 +135,52 @@ fun VerticalReader(
         listState.animateScrollToItem(currentPage)
     }
 
-    LazyColumn(
-        state = listState,
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(
-            top = if (showControls) 80.dp else 0.dp,
-            bottom = if (showControls) 80.dp else 0.dp
-        )
-    ) {
-        items(pages, key = { it.index }) { page ->
-            SubcomposeAsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(page.imageUrl)
-                    .crossfade(true)
-                    .build(),
-                contentDescription = "Page ${page.index}",
-                modifier = Modifier.fillMaxWidth(),
-                contentScale = if (settings.mode == ReadingMode.WEBTOON) ContentScale.FillWidth else ContentScale.FillWidth,
-                loading = {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(400.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator(color = Color.White)
+    Box(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(
+            state = listState,
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(
+                top = if (showControls) 80.dp else 0.dp,
+                bottom = if (showControls) 80.dp else 0.dp
+            )
+        ) {
+            items(pages, key = { it.index }) { page ->
+                SubcomposeAsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(page.imageUrl)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = "Page ${page.index}",
+                    modifier = Modifier.fillMaxWidth(),
+                    contentScale = if (settings.mode == ReadingMode.WEBTOON) ContentScale.FillWidth else ContentScale.FillWidth,
+                    loading = {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(400.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator(color = Color.White)
+                        }
                     }
-                }
+                )
+            }
+        }
+
+        if (showControls) {
+            Slider(
+                value = currentPage.toFloat(),
+                onValueChange = { onPageChanged(it.toInt()) },
+                valueRange = 0f..(pages.size - 1).coerceAtLeast(0).toFloat(),
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(horizontal = 16.dp, vertical = 32.dp)
             )
         }
     }
-
-    if (showControls) {
-        Slider(
-            value = currentPage.toFloat(),
-            onValueChange = { onPageChanged(it.toInt()) },
-            valueRange = 0f..(pages.size - 1).coerceAtLeast(0).toFloat(),
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(horizontal = 16.dp, vertical = 32.dp)
-        )
-    }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HorizontalReader(
     pages: List<ChapterPage>,
@@ -216,6 +221,7 @@ fun HorizontalReader(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReaderControls(
     currentPage: Int,

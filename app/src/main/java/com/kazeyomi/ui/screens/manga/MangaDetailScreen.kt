@@ -329,9 +329,10 @@ fun ChapterItem(
         },
         modifier = Modifier.clickable(onClick = onClick)
     )
-    HorizontalDivider()
+    Divider()
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun MangaInfo(manga: Manga) {
     Column(
@@ -402,6 +403,7 @@ fun InfoItem(label: String, value: String) {
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun FlowRow(
     modifier: Modifier = Modifier,

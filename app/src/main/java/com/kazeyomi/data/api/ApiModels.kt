@@ -1,6 +1,14 @@
 package com.kazeyomi.data.api
 
 import com.google.gson.annotations.SerializedName
+import com.kazeyomi.domain.model.Category
+import com.kazeyomi.domain.model.Chapter
+import com.kazeyomi.domain.model.ChapterPage
+import com.kazeyomi.domain.model.ChapterStatus
+import com.kazeyomi.domain.model.Download
+import com.kazeyomi.domain.model.DownloadState
+import com.kazeyomi.domain.model.Manga
+import com.kazeyomi.domain.model.MangaStatus
 
 data class MangaResponse(
     @SerializedName("manga")

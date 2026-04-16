@@ -117,5 +117,5 @@ fun SourceItem(
         },
         modifier = Modifier.clickable(onClick = onClick)
     )
-    HorizontalDivider()
+    Divider()
 }

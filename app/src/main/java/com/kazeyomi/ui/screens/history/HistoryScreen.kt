@@ -134,7 +134,7 @@ fun HistoryItem(
         },
         modifier = Modifier.clickable(onClick = onClick)
     )
-    HorizontalDivider()
+    Divider()
 }
 
 private fun formatDate(dateString: String): String {

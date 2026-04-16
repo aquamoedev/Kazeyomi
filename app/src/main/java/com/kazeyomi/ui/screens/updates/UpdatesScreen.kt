@@ -106,5 +106,5 @@ fun UpdateItem(
             }
         }
     )
-    HorizontalDivider()
+    Divider()
 }
