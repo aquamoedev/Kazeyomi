@@ -195,6 +195,10 @@ data class UpdateItem(
 // ── About/Server DTOs ──
 
 data class AboutServerResponse(
+    @SerializedName("aboutServer") val about: AboutServerDto?
+)
+
+data class AboutServerDto(
     @SerializedName("version") val version: String?,
     @SerializedName("versionName") val versionName: String?,
     @SerializedName("apiVersion") val apiVersion: String?,
@@ -204,9 +208,12 @@ data class AboutServerResponse(
     @SerializedName("name") val name: String?
 )
 
-fun AboutServerResponse.toServerInfo(): ServerInfo = ServerInfo(
-    version = version ?: "",
-    versionName = versionName ?: "",
-    apiVersion = (apiVersion?.toIntOrNull() ?: 0),
-    dataFolder = dataFolder ?: ""
-)
+fun AboutServerResponse.toServerInfo(): ServerInfo {
+    val a = about ?: return ServerInfo()
+    return ServerInfo(
+        version = a.version ?: "",
+        versionName = a.versionName ?: "",
+        apiVersion = a.apiVersion?.toIntOrNull() ?: 0,
+        dataFolder = a.dataFolder ?: ""
+    )
+}
