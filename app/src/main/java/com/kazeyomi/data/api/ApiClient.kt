@@ -20,14 +20,19 @@ class ApiClient @Inject constructor() {
         this.baseUrl = if (baseUrl.endsWith("/")) baseUrl else "$baseUrl/"
 
         val client = OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(
-                HttpLoggingInterceptor().apply {
-                    level = HttpLoggingInterceptor.Level.BODY
+            .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC })
+            .addInterceptor { chain ->
+                val response = chain.proceed(chain.request())
+                if (!response.isSuccessful) {
+                    val body = response.body?.string() ?: ""
+                    response.close()
+                    throw ApiException(response.code, body.ifEmpty { "HTTP ${response.code}" })
                 }
-            )
+                response
+            }
             .apply {
                 if (!username.isNullOrBlank() && !password.isNullOrBlank()) {
                     addInterceptor { chain ->
@@ -44,11 +49,7 @@ class ApiClient @Inject constructor() {
         api = Retrofit.Builder()
             .baseUrl(this.baseUrl)
             .client(client)
-            .addConverterFactory(
-                GsonConverterFactory.create(
-                    GsonBuilder().setLenient().create()
-                )
-            )
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
             .build()
             .create(SuwayomiApi::class.java)
     }
